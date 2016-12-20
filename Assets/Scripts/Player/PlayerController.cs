@@ -31,10 +31,5 @@ public class PlayerController : MonoBehaviour {
 			canAct = true;
 			pathfind.Reset ();
 		}
-		if (Input.GetKeyDown (KeyCode.R)) {
-			Debug.Log ("RESET");
-			canAct = true;
-			pathfind.Reset ();
-		}
 	}
 }
