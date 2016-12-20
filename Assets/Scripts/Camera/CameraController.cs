@@ -83,40 +83,7 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 	void UpdateManualPosition(){
-		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D)) {
-			if (Input.GetKey (KeyCode.W)) {
-				if (Input.GetKey (KeyCode.D)) {
-					this.transform.position = this.transform.position + new Vector3 (diagSpeed, 0, diagSpeed);
-				} else if (Input.GetKey (KeyCode.A)) {
-					this.transform.position = this.transform.position +  new Vector3 (-diagSpeed, 0, diagSpeed);
-				} else {
-					this.transform.position = this.transform.position + new Vector3 (0, 0, speed);
-				}
-			} else if (Input.GetKey (KeyCode.A)) {
-				if (Input.GetKey (KeyCode.W)) {
-					this.transform.position = this.transform.position +  new Vector3 (-diagSpeed, 0, diagSpeed);
-				} else if (Input.GetKey (KeyCode.S)) {
-					this.transform.position = this.transform.position + new Vector3 (-diagSpeed, 0, -diagSpeed);
-				} else {
-					this.transform.position = this.transform.position + new Vector3 (-speed, 0, 0);
-				}
-			} else if (Input.GetKey (KeyCode.S)) {
-				if (Input.GetKey (KeyCode.D)) {
-					this.transform.position = this.transform.position + new Vector3 (diagSpeed, 0, -diagSpeed);
-				} else if (Input.GetKey (KeyCode.A)) {
-					this.transform.position = this.transform.position + new Vector3 (-diagSpeed, 0, -diagSpeed);
-				} else {
-					this.transform.position = this.transform.position + new Vector3 (0, 0, -speed);
-				}
-			} else if (Input.GetKey (KeyCode.D)) {
-				if (Input.GetKey (KeyCode.W)) {
-					this.transform.position = this.transform.position + new Vector3 (diagSpeed, 0, diagSpeed);
-				} else if (Input.GetKey (KeyCode.S)) {
-					this.transform.position = this.transform.position + new Vector3 (diagSpeed, 0, -diagSpeed);
-				} else {
-					this.transform.position = this.transform.position + new Vector3 (speed, 0, 0);
-				}
-			}
-		}
+		Vector3 newPos = new Vector3(Input.GetAxisRaw("Horizontal"), this.transform.position.y, Input.GetAxisRaw("Vertical"));
+     		this.transform.Translate(speed * newPos.normalized * Time.deltaTime);   
 	}
 }
