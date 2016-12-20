@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
 		targetPos = this.transform.position;
 		canAct = true;
 		pathfind = new AStar (this.transform.position.y);
-
+		PlayerList.AddToPlayers(this);
 	}
 	
 	// Update is called once per frame
