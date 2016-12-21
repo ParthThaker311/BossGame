@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class PlayerController : MonoBehaviour {
+public class Player : MonoBehaviour {
 	Vector3 targetPos;
 	bool hasMoved;
 	AStar pathfind;
@@ -12,13 +12,12 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		rom = this.gameObject.GetComponent<CatmullRom> ();
 		targetPos = this.transform.position;
-		canAct = true;
 		pathfind = new AStar (this.transform.position.y);
 		PlayerList.AddToPlayers(this);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
 		if(isTurn){
 			if (!hasMoved && numActions > 0 && Input.GetMouseButtonDown (0) && TileMousePos.IsValid ()) {
 				hasMoved = true;
@@ -37,15 +36,18 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}
-	void BeginTurn(){
+	public void BeginTurn(){
 		isTurn = true;	
 		numActions = 2;
 		hasMoved = false;
 	}
-	void EndTurn(){
+	public void EndTurn(){
 		isTurn = false;	
 	}
 	public bool IsTurn(){
 		return isTurn;	
+	}
+	public bool IsMoving(){
+		return rom.move;
 	}
 }

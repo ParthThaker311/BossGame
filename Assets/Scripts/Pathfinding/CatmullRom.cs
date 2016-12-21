@@ -73,7 +73,6 @@ public class CatmullRom : MonoBehaviour {
 		int index = 0;
 		segmentNum = 0;
 		foreach (Vector3 vec in path) {
-			Debug.Log (vec);
 			controlPoints [index] = vec;
 			index++;
 		}

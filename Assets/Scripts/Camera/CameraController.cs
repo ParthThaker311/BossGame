@@ -10,16 +10,15 @@ public class CameraController : MonoBehaviour {
 	Vector3 currentPos;
 	Vector3 targetPos;
 	public float cameraDistance = 10f;
-	public float diagSpeed = 2.5f;
-	float speed; 
+	public float speed; 
+	float oldY;
 	// Use this for initialization
 	void Start () {
-		speed = diagSpeed * 1.25f;
-
+		oldY = this.transform.position.y;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		if (direction == 0) {
 			direction = 40;
 		}
@@ -50,7 +49,6 @@ public class CameraController : MonoBehaviour {
 		this.transform.rotation = Quaternion.Euler (20f, this.transform.rotation.eulerAngles.y, 0f);
 	}
 	void UpdateRotationPosition(bool increasingDir){
-		Debug.Log (direction);
 		switch (Mathf.Abs (direction % 4)) {
 		case 0:
 			if (increasingDir) {
@@ -83,7 +81,8 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 	void UpdateManualPosition(){
-		Vector3 newPos = new Vector3(Input.GetAxisRaw("Horizontal"), this.transform.position.y, Input.GetAxisRaw("Vertical"));
-     		this.transform.Translate(speed * newPos.normalized * Time.deltaTime);   
+		Vector3 newPos = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+     	this.transform.Translate(speed * newPos.normalized * Time.deltaTime);  
+		this.transform.position = new Vector3 (this.transform.position.x, oldY, this.transform.position.z);
 	}
 }
