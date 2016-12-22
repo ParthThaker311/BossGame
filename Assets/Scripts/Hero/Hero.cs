@@ -8,6 +8,7 @@ public class Hero : MonoBehaviour {
 	CatmullRom rom;
 	bool isTurn;
 	int numActions = 2;
+	float randVariance = 2;
 	// Use this for initialization
 	void Start () {
 		rom = this.gameObject.GetComponent<CatmullRom> ();
@@ -26,7 +27,7 @@ public class Hero : MonoBehaviour {
         //1)Move to range of player if player is visible
         //2)Move to unexplored area of map 
         //3)Revisit explored areas of map
-				//targetPos = new Vector3(TileMousePos.mousePos.x,this.transform.position.y,TileMousePos.mousePos.z);
+				targetPos = new Vector3(GetRandXPos(),this.transform.position.y,GetRandZPos());
 				List<Vector3> path = pathfind.FindPath (this.transform.position, targetPos);
 				rom.SetPoints (path);
 				rom.move = true;
@@ -39,6 +40,20 @@ public class Hero : MonoBehaviour {
 				EndTurn();
 			}
 		}
+	}
+	int GetRandXPos(){
+		int newX = (int)(Random.Range(this.transform.position.x/Level.tileSize - randVariance,this.transform.position.x/Level.tileSize + randVariance + Level.tileSize))*Level.tileSize;
+		while (newX < 0 || newX > (Level.width-1)*Level.tileSize) {
+			newX = (int)(Random.Range(this.transform.position.x/Level.tileSize - randVariance,this.transform.position.x/Level.tileSize + randVariance + Level.tileSize))*Level.tileSize;
+		}
+		return newX;
+	}
+	int GetRandZPos(){
+		int newZ = (int)(Random.Range(this.transform.position.z/Level.tileSize - randVariance,this.transform.position.z/Level.tileSize + randVariance + Level.tileSize))*Level.tileSize;
+		while (newZ < 0 || newZ > (Level.length-1)*Level.tileSize) {
+			newZ = (int)(Random.Range(this.transform.position.z/Level.tileSize - randVariance,this.transform.position.z/Level.tileSize + randVariance + Level.tileSize))*Level.tileSize;
+		}
+		return newZ;
 	}
 	public void BeginTurn(){
 		isTurn = true;	
