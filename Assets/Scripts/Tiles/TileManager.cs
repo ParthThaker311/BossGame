@@ -38,14 +38,15 @@ public class TileManager : MonoBehaviour {
 	void CreateTiles(){
 		for (int i = 0; i < levelWidth; i++) {
 			for (int j = 0; j < levelLength; j++) {
-				GameObject obj = new GameObject ();
 				if (floor [i, j] == 0) {
-					obj = Instantiate (tile, new Vector3 (i * tileSize, .25f, j * tileSize), tile.transform.rotation) as GameObject;
-				} else if (floor [i, j] == 1) {
-					obj = Instantiate (wall, new Vector3 (i * tileSize, .25f, j * tileSize), tile.transform.rotation) as GameObject;
-				}
+					GameObject obj = Instantiate (tile, new Vector3 (i * tileSize, .25f, j * tileSize), tile.transform.rotation) as GameObject;
 					obj.transform.parent = this.gameObject.transform;
-					obj.transform.name = "tile" + i.ToString () + j.ToString ();
+					obj.transform.name = "floor" + i.ToString () + j.ToString ();
+				} else if (floor [i, j] == 1) {
+					GameObject obj = Instantiate (wall, new Vector3 (i * tileSize, .25f, j * tileSize), tile.transform.rotation) as GameObject;
+					obj.transform.parent = this.gameObject.transform;
+					obj.transform.name = "wall" + i.ToString () + j.ToString ();
+				}
 			}
 		}
 	}
