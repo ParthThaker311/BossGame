@@ -3,5 +3,5 @@ using System.Collections;
 
 public interface IAttack
 {
-    void GetDamage();
+    float GetDamage();
 }
