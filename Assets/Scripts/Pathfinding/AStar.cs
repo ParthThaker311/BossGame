@@ -89,16 +89,24 @@ public class AStar {
 	public List<Node> GetAdjacentNodes (Node position){
 		List<Node> returnList = new List<Node> ();
 		if (position.x > 1) {
-				returnList.Add (new Node (position.x -2, position.z));
+			if(Level.IsValid(position.x - Level.tileSize, position.z)){
+				returnList.Add (new Node (position.x - Level.tileSize, position.z));
+			}
 		}
-		if (position.x < 30) {
-				returnList.Add (new Node (position.x + 2, position.z));
+		if (position.x < Level.width) {
+			if(Level.IsValid(position.x + Level.tileSize, position.z)){
+				returnList.Add (new Node (position.x + Level.tileSize, position.z));
+			}
 		}
 		if (position.z > 1) {
-				returnList.Add (new Node (position.x, position.z - 2));
+			if(Level.IsValid(position.x, position.z - Level.tileSize)){
+				returnList.Add (new Node (position.x, position.z - Level.tileSize));
+			}
 		}
-		if (position.x < 30) {
-				returnList.Add (new Node (position.x, position.z + 2));
+		if (position.x < Level.length) {
+			if(Level.IsValid(position.x, position.z + Level.tileSize)){
+				returnList.Add (new Node (position.x, position.z + Level.tileSize));
+			}
 		}
 		if (Random.Range (0, 100) < 50) {
 			returnList.Reverse ();
