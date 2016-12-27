@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void Update () {
+		UpdateHealth();
 		if(isTurn){
 			if (!hasMoved && numActions > 0 && Input.GetMouseButtonDown (0) && TileMousePos.IsValid ()) {
 				hasMoved = true;
@@ -35,6 +36,17 @@ public class Player : MonoBehaviour {
 				EndTurn();
 			}
 		}
+	}
+	void UpdateHealth(){
+		if(health <=0){
+			Destory(this.gameObject);	
+		}
+		if(health < 100){
+			health+=.1;	
+		}
+	}
+	public void Damage(IAttack attack){
+		health -= attack.GetDamage();
 	}
 	public void BeginTurn(){
 		isTurn = true;	
