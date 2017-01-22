@@ -9,6 +9,9 @@ public static class Level {
 	public static int[,] floor = new int[width, length];
 	
 	public static bool IsValid(int x, int z){
-		return if(floor[x,z] == 0);
+		if (floor [x, z] == 0) {
+			return true;
+		}
+		return false;
 	}
 }

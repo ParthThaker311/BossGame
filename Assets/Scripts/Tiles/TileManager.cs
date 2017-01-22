@@ -4,8 +4,8 @@ using System.Collections;
 public class TileManager : MonoBehaviour {
 	int levelLength;
 	int levelWidth;
-	public GameObject tile;
-	public GameObject wall;
+	public GameObject walkableTile;
+	public GameObject unwalkableTile;
 	int tileSize;
 	// Use this for initialization
 	void Start () {
@@ -23,27 +23,21 @@ public class TileManager : MonoBehaviour {
 	void GenerateTiles(){
 		for (int i = 0; i < levelWidth; i++) {
 			for (int j = 0; j < levelLength; j++) {
-				if (i == 0 || j == 0 || i == 9 || j == 9) {
-					Level.floor [i, j] = 1;
-				} else {
 					Level.floor [i, j] = 0;
 				}
 			}
-		}
-		Level.floor [2, 8] = 1;
-		Level.floor [3, 3] = 1;
 	}
 	void CreateTiles(){
 		for (int i = 0; i < levelWidth; i++) {
 			for (int j = 0; j < levelLength; j++) {
 				if (Level.floor [i, j] == 0) {
-					GameObject obj = Instantiate (tile, new Vector3 (i * tileSize, .25f, j * tileSize), tile.transform.rotation) as GameObject;
+					GameObject obj = Instantiate (walkableTile, new Vector3 (i * tileSize, .25f, j * tileSize), walkableTile.transform.rotation) as GameObject;
 					obj.transform.parent = this.gameObject.transform;
 					obj.transform.name = "floor" + i.ToString () + j.ToString ();
 				} else if (Level.floor [i, j] == 1) {
-					GameObject obj = Instantiate (wall, new Vector3 (i * tileSize, .25f, j * tileSize), tile.transform.rotation) as GameObject;
+					GameObject obj = Instantiate (unwalkableTile, new Vector3 (i * tileSize, .25f, j * tileSize), unwalkableTile.transform.rotation) as GameObject;
 					obj.transform.parent = this.gameObject.transform;
-					obj.transform.name = "wall" + i.ToString () + j.ToString ();
+					obj.transform.name = "floor" + i.ToString () + j.ToString ();
 				}
 			}
 		}

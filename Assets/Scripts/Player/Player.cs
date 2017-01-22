@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 	CatmullRom rom;
 	bool isTurn;
 	int numActions = 2;
+	float health = 100;
 	// Use this for initialization
 	void Start () {
 		rom = this.gameObject.GetComponent<CatmullRom> ();
@@ -39,10 +40,10 @@ public class Player : MonoBehaviour {
 	}
 	void UpdateHealth(){
 		if(health <=0){
-			Destory(this.gameObject);	
+			Destroy(this.gameObject);	
 		}
 		if(health < 100){
-			health+=.1;	
+			health+=.1f;	
 		}
 	}
 	public void Damage(IAttack attack){
